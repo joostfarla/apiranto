@@ -1,0 +1,32 @@
+{
+  "name": "apiranto",
+  "version": "0.0.0",
+  "description": "API Documentation Generator",
+  "main": "src/apiranto.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apiwise/apiranto.git"
+  },
+  "keywords": [
+    "api",
+    "docs",
+    "documentation",
+    "swagger"
+  ],
+  "author": "Apiwise",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/apiwise/apiranto/issues"
+  },
+  "homepage": "https://github.com/apiwise/apiranto#readme",
+  "dependencies": {
+    "bootstrap-sass": "^3.3.5",
+    "commander": "^2.8.1",
+    "jade": "^1.11.0",
+    "lodash": "^3.10.0",
+    "marked": "^0.3.3",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^3.2.0",
+    "swagger-parser": "^2.5.0"
+  }
+}

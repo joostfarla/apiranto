@@ -1,0 +1,14 @@
+doctype
+html
+  head
+    meta(charset='utf-8')
+    link(rel='stylesheet', href='css/style.css')
+    block title
+      title= api.info.title
+  body
+    div(class='container')
+      .row
+        .col-md-3(class='sidebar')
+          block sidebar
+        .col-md-9(class='content')
+          block content

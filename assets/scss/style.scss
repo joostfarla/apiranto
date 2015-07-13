@@ -1,0 +1,26 @@
+@import 'variables';
+@import 'bootstrap';
+
+.sidebar {
+  margin-top: 40px;
+}
+
+.label {
+  border-radius: 1em;
+}
+
+.label-get {
+  background-color: $color-get;
+}
+
+.label-post {
+  background-color: $color-post;
+}
+
+.label-put {
+  background-color: $color-put;
+}
+
+.label-delete {
+  background-color: $color-delete;
+}

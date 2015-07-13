@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+'use strict';
+
+var apiranto = require('../src/apiranto'),
+  program = require('commander');
+
+program
+  .command('generate <definition> <target>')
+  .description('Generates static documentation.')
+  .action(function (definition, target) {
+    apiranto.generate(definition, target, {}, function (err) {
+      if (err) {
+        console.error('Error: ' + err.message);
+        return;
+      }
+
+      console.log('Successfully generated API documentation.')
+    });
+  });
+
+program.parse(process.argv);
