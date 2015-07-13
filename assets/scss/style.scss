@@ -1,8 +1,8 @@
 @import 'variables';
 @import 'bootstrap';
 
-.sidebar {
-  margin-top: 40px;
+.footer {
+  text-align: center;
 }
 
 .label {
@@ -23,4 +23,26 @@
 
 .label-delete {
   background-color: $color-delete;
+}
+
+.sidebar {
+  margin-top: 40px;
+}
+
+.panel-heading {
+  font-size: 16px;
+  font-weight: 500;
+
+  h2 {
+    display: inline-block;
+    margin: 0px;
+    font-size: 16px;
+    line-height: $line-height-computed;
+  }
+}
+
+.panel-body {
+  h3 {
+    font-size: 16px;
+  }
 }

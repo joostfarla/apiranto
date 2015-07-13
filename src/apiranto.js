@@ -40,6 +40,7 @@ function parseFile (file, done) {
 
 function buildDoc (api, target, options, done) {
   var html = jade.renderFile(options.baseDir + '/templates/default.jade', {
+    _: require('lodash'),
     api: api,
     markdown: require('marked')
   });
