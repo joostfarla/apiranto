@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "API Documentation Generator",
   "main": "src/apiranto.js",
+  "bin": {
+    "apiranto": "./bin/apiranto.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/apiwise/apiranto.git"
