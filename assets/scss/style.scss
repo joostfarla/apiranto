@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'bootstrap';
+@import 'hljs';
 
 .footer {
   text-align: center;
@@ -7,6 +8,7 @@
 
 .label {
   border-radius: 1em;
+  float: right;
 }
 
 .label-get {
