@@ -38,7 +38,7 @@ block content
               code= path
             if call.parameters
               hr
-              strong Parameters (* required)
+              .call-heading Parameters (* required)
               table(class='table')
                 thead
                   th Name
@@ -54,7 +54,7 @@ block content
                       td!= param.description ? markdown(param.description) : ''
             if call.responses
               hr
-              strong Response messages
+              .call-heading Response messages
               table(class='table')
                 thead
                   th Status code
