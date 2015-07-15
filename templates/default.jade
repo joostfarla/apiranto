@@ -3,43 +3,43 @@ extends _layout
 block sidebar
   nav
     each group in groups
-      div(class='panel panel-default')
-        div(class='panel-heading')= group.description
-        div(class='panel-body')
-          ul(class='nav nav-pills nav-stacked')
+      div.panel.panel-default
+        div.panel-heading= group.description
+        div.panel-body
+          ul.nav.nav-pills.nav-stacked
             each methods, path in group.paths
               each call, method in methods
                 li
                   a(href='#' + path + '|' + method)= call.summary
-                    span(class='label label-#{method} pull-right')
+                    span.label(class='label-#{method}')
                       = method.toUpperCase()
 
 block content
-  h1(class='page-header')= api.info.title
+  h1.page-header= api.info.title
     if api.info.version
       = ' '
       small Version #{api.info.version}
   if api.info.description
-    .api-description!= markdown(api.info.description)
+    .api-description!= helpers.markdown(api.info.description)
   each group in groups
     h2= group.description
     each methods, path in group.paths
       each call, method in methods
-        div(class='panel panel-default', id=path + '|' + method)
-          div(class='panel-heading')
+        div.panel.panel-default(id=path + '|' + method)
+          div.panel-heading
             h3= call.summary
-            span(class='label label-#{method} pull-right')
+            span.label(class='label-#{method}')
               = method.toUpperCase()
-          div(class='panel-body')
+          div.panel-body
             if call.description
-              != markdown(call.description)
+              != helpers.markdown(call.description)
             p
               strong= 'URL: '
               code= path
             if call.parameters
               hr
               .call-heading Parameters (* required)
-              table(class='table')
+              table.table
                 thead
                   th Name
                   th Type
@@ -51,11 +51,11 @@ block content
                       td= param.name + (param.required ? '*' : (param.default ? ' (default: ' + param.default + ')' : ''))
                       td= _.capitalize(param.type)
                       td= param['x-example']
-                      td!= param.description ? markdown(param.description) : ''
+                      td!= param.description ? helpers.markdown(param.description) : ''
             if call.responses
               hr
               .call-heading Response messages
-              table(class='table')
+              table.table
                 thead
                   th Status code
                   th Description
@@ -64,3 +64,8 @@ block content
                     tr
                       td= statusCode
                       td= response.description
+                    if response.schema
+                      tr
+                        td(colspan=2)
+                          pre
+                            code.json!= helpers.renderJson(helpers.buildExample(response.schema))

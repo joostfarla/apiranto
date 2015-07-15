@@ -25,6 +25,7 @@
   "dependencies": {
     "bootstrap-sass": "^3.3.5",
     "commander": "^2.8.1",
+    "highlight.js": "^8.6.0",
     "jade": "^1.11.0",
     "lodash": "^3.10.0",
     "marked": "^0.3.3",

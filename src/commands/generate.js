@@ -56,7 +56,11 @@ function buildDoc (api, target, options, done) {
     _: require('lodash'),
     api: api,
     groups: groups,
-    markdown: require('marked')
+    helpers: {
+      buildExample: require('../helpers/buildExample'),
+      renderJson: require('../helpers/renderJson'),
+      markdown: require('marked')
+    }
   });
 
   fs.writeFile(path.resolve(target, 'index.html'), html, function (err) {
