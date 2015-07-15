@@ -2,16 +2,17 @@ extends _layout
 
 block sidebar
   nav
-    div(class='panel panel-default')
-      div(class='panel-heading') API Calls
-      div(class='panel-body')
-        ul(class='nav nav-pills nav-stacked')
-          each methods, path in api.paths
-            each call, method in methods
-              li
-                a(href='#' + path + '|' + method)= call.summary
-                  span(class='label label-#{method} pull-right')
-                    = method.toUpperCase()
+    each group in groups
+      div(class='panel panel-default')
+        div(class='panel-heading')= group.description
+        div(class='panel-body')
+          ul(class='nav nav-pills nav-stacked')
+            each methods, path in group.paths
+              each call, method in methods
+                li
+                  a(href='#' + path + '|' + method)= call.summary
+                    span(class='label label-#{method} pull-right')
+                      = method.toUpperCase()
 
 block content
   h1(class='page-header')= api.info.title
@@ -19,45 +20,47 @@ block content
       = ' '
       small Version #{api.info.version}
   if api.info.description
-    != markdown(api.info.description)
-  each methods, path in api.paths
-    each call, method in methods
-      div(class='panel panel-default', id=path + '|' + method)
-        div(class='panel-heading')
-          h2= call.summary
-          span(class='label label-#{method} pull-right')
-            = method.toUpperCase()
-        div(class='panel-body')
-          if call.description
-            != markdown(call.description)
-          p
-            strong= 'URL: '
-            code= path
-          if call.parameters
-            hr
-            h3 Parameters (* required)
-            table(class='table')
-              thead
-                th Name
-                th Type
-                th Example
-                th Description
-              tbody
-                each param in call.parameters
-                  tr
-                    td= param.name + (param.required ? '*' : (param.default ? ' (default: ' + param.default + ')' : ''))
-                    td= _.capitalize(param.type)
-                    td= param['x-example']
-                    td!= param.description ? markdown(param.description) : ''
-          if call.responses
-            hr
-            h3 Response messages
-            table(class='table')
-              thead
-                th Status code
-                th Description
-              tbody
-                each response, statusCode in call.responses
-                  tr
-                    td= statusCode
-                    td= response.description
+    .api-description!= markdown(api.info.description)
+  each group in groups
+    h2= group.description
+    each methods, path in group.paths
+      each call, method in methods
+        div(class='panel panel-default', id=path + '|' + method)
+          div(class='panel-heading')
+            h3= call.summary
+            span(class='label label-#{method} pull-right')
+              = method.toUpperCase()
+          div(class='panel-body')
+            if call.description
+              != markdown(call.description)
+            p
+              strong= 'URL: '
+              code= path
+            if call.parameters
+              hr
+              strong Parameters (* required)
+              table(class='table')
+                thead
+                  th Name
+                  th Type
+                  th Example
+                  th Description
+                tbody
+                  each param in call.parameters
+                    tr
+                      td= param.name + (param.required ? '*' : (param.default ? ' (default: ' + param.default + ')' : ''))
+                      td= _.capitalize(param.type)
+                      td= param['x-example']
+                      td!= param.description ? markdown(param.description) : ''
+            if call.responses
+              hr
+              strong Response messages
+              table(class='table')
+                thead
+                  th Status code
+                  th Description
+                tbody
+                  each response, statusCode in call.responses
+                    tr
+                      td= statusCode
+                      td= response.description

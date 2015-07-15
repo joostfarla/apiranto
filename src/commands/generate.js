@@ -1,6 +1,7 @@
 'use strict';
 
-var fs = require('fs'),
+var _ = require('lodash'),
+  fs = require('fs'),
   jade = require('jade'),
   mkdirp = require('mkdirp'),
   parser = require('swagger-parser'),
@@ -39,9 +40,22 @@ function parseFile (file, done) {
 }
 
 function buildDoc (api, target, options, done) {
+  var groups = [];
+
+  if (api.tags) {
+    groups = groupByTags(api.paths, api.tags);
+  } else {
+    groups = [{
+      name: 'default',
+      description: 'API calls',
+      paths: api.paths
+    }];
+  }
+
   var html = jade.renderFile(options.baseDir + '/templates/default.jade', {
     _: require('lodash'),
     api: api,
+    groups: groups,
     markdown: require('marked')
   });
 
@@ -91,3 +105,33 @@ function buildAssets (target, options, done) {
     });
   });
 }
+
+function groupByTags (paths, tags) {
+  var groups = [];
+
+  _.forEach(tags, function (tag) {
+    var group = {
+      name: tag.name,
+      description: tag.description,
+      paths: {}
+    };
+
+    _.forEach(paths, function (methods, path) {
+      var matches = _.transform(methods, function (result, call, method) {
+        if (_.includes(call.tags, tag.name)) {
+          result[method] = call;
+        }
+      });
+
+      if (Object.keys(matches).length > 0) {
+        group.paths[path] = matches;
+      }
+    });
+
+    if (Object.keys(group.paths).length > 0) {
+      groups.push(group);
+    }
+  });
+
+  return groups;
+};
