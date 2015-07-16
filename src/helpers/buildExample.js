@@ -8,20 +8,12 @@ module.exports = function (schema) {
 
 function traverseSchema (schema) {
   if (schema.type === 'object') {
-    var result = {};
-
-    _.forEach(schema.properties, function (property, key) {
-      result[key] = traverseSchema(property);
+    return _.mapValues(schema.properties, function (property) {
+      return traverseSchema(property);
     });
-
-    return result;
   }
 
-  if (schema.type === 'array') {
-    if (schema.example) {
-      return schema.example;
-    }
-
+  if (schema.type === 'array' && !schema.example) {
     return [
       traverseSchema(schema.items)
     ];
