@@ -27,12 +27,24 @@
   background-color: $color-delete;
 }
 
-.content h2 {
-  margin: 40px 0;
+.sidebar {
+  top: 40px;
+  width: 260px;
+  position: fixed;
 }
 
-.sidebar {
-  margin-top: 40px;
+.content {
+  padding: 0 40px;
+
+  h2 {
+   margin: 40px 0;
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .content {
+    margin-left: 260px;
+  }
 }
 
 .panel-heading {
