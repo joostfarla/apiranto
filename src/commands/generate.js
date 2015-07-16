@@ -83,6 +83,7 @@ function buildDoc (api, target, options, done) {
 function buildAssets (target, options, done) {
   sass.render({
     file: options.baseDir + '/assets/scss/style.scss',
+    outputStyle: 'compressed',
     includePaths: [
       options.baseDir + '/node_modules/bootstrap-sass/assets/stylesheets'
     ]
