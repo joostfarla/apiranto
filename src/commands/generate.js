@@ -59,7 +59,8 @@ function buildDoc (api, target, options, done) {
     helpers: {
       buildExample: require('../helpers/buildExample'),
       renderJson: require('../helpers/renderJson'),
-      markdown: require('marked')
+      markdown: require('marked'),
+      hashString: require('../helpers/hashString')
     }
   });
 

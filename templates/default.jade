@@ -10,7 +10,7 @@ block sidebar
             each methods, path in group.paths
               each call, method in methods
                 li
-                  a(href='#' + path + '|' + method)= call.summary
+                  a(href='#' + helpers.hashString(path + '|' + method))= call.summary
                     span.label(class='label-#{method}')
                       = method.toUpperCase()
 
@@ -25,7 +25,7 @@ block content
     h2= group.description
     each methods, path in group.paths
       each call, method in methods
-        div.panel.panel-default(id=path + '|' + method)
+        div.panel.panel-default(id=helpers.hashString(path + '|' + method))
           div.panel-heading
             h3= call.summary
             span.label(class='label-#{method}')
